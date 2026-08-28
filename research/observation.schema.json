@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://continufy.invalid/research/observation.schema.json",
+  "title": "Livestream clip observation (research only)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["observation_id", "observed_at", "creator", "livestream", "moment", "clip", "downstream_publication", "outcome", "provenance", "uncertainty"],
+  "properties": {
+    "observation_id": {"type": "string", "minLength": 1},
+    "observed_at": {"type": "string", "format": "date-time"},
+    "creator": {"$ref": "#/$defs/entity"},
+    "livestream": {"$ref": "#/$defs/entity"},
+    "moment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["start_offset_seconds", "end_offset_seconds", "derivation"],
+      "properties": {
+        "start_offset_seconds": {"type": ["number", "null"], "minimum": 0},
+        "end_offset_seconds": {"type": ["number", "null"], "minimum": 0},
+        "derivation": {"enum": ["platform_vod_offset", "timestamp_alignment", "creator_attestation", "unknown"]}
+      }
+    },
+    "clip": {"$ref": "#/$defs/entity"},
+    "downstream_publication": {
+      "anyOf": [
+        {"type": "null"},
+        {"type": "object", "additionalProperties": false, "required": ["platform", "id", "linkage_method", "linkage_confidence"],
+         "properties": {"platform": {"type": "string"}, "id": {"type": "string"}, "linkage_method": {"enum": ["platform_reference", "creator_attestation", "exact_media_hash", "perceptual_match", "manual_candidate"]}, "linkage_confidence": {"enum": ["confirmed", "probable", "candidate"]}}}
+      ]
+    },
+    "outcome": {
+      "type": "object", "additionalProperties": false, "required": ["metric", "value", "measured_at", "window_seconds"],
+      "properties": {"metric": {"type": "string"}, "value": {"type": ["integer", "number", "null"]}, "measured_at": {"type": "string", "format": "date-time"}, "window_seconds": {"type": ["integer", "null"], "minimum": 0}}
+    },
+    "provenance": {
+      "type": "object", "additionalProperties": false, "required": ["source", "request", "retrieved_at", "raw_sha256"],
+      "properties": {"source": {"type": "string"}, "request": {"type": "string"}, "retrieved_at": {"type": "string", "format": "date-time"}, "raw_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"}}
+    },
+    "uncertainty": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+  },
+  "$defs": {
+    "entity": {
+      "type": "object", "additionalProperties": false, "required": ["platform", "id"],
+      "properties": {"platform": {"type": "string"}, "id": {"type": ["string", "null"]}, "url": {"type": ["string", "null"]}}
+    }
+  }
+}
