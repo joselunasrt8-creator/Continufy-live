@@ -1,0 +1,5 @@
+attempt_id,attempted_at_utc,source,request_class,result,records,reason
+pilot-001,2026-08-27T04:19:32Z,local_repository,issue_1,blocked,0,"Repository has no issue export, remote URL, or issue text; supplied task statement used as scope but is not represented as retrieved issue evidence"
+pilot-002,2026-08-27T04:19:32Z,Twitch Helix,clips_videos_streams,blocked,0,"TWITCH_CLIENT_ID and TWITCH_ACCESS_TOKEN are unavailable; official API forbids an anonymous request"
+pilot-003,2026-08-27T04:19:32Z,YouTube Data API v3,videos_channels_search,blocked,0,"YOUTUBE_API_KEY is unavailable; no predeclared sampling frame exists"
+pilot-004,2026-08-27T04:19:32Z,cross_platform,provenance_linkage,blocked,0,"Official public APIs expose no general Twitch clip to downstream short-form publication lineage"
