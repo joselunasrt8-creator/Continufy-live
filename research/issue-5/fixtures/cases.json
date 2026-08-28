@@ -1,0 +1,13 @@
+{
+  "valid": ["published_complete"],
+  "invalid": [
+    "schema_extra_property",
+    "stage_order",
+    "stage_chronology",
+    "missingness_timestamp",
+    "missing_provenance",
+    "interval_overlap",
+    "terminal_timestamp",
+    "outcome_window"
+  ]
+}

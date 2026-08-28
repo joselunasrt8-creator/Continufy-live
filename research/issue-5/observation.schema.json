@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://continufy.invalid/research/issue-5/observation.schema.json",
+  "title": "Continufy live latency observation v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_id", "observation_id", "creator_id", "session_id", "session_start_at", "occurred_at", "eligible", "exclusion_reason", "stages", "provenance", "terminal_status", "published_at", "abandoned_at", "abandoned_by", "abandonment_reason", "outcome"],
+  "properties": {
+    "protocol_id": {"const": "continufy-live-latency-v1.0.0"},
+    "observation_id": {"type": "string", "pattern": "^obs_[A-Za-z0-9_-]+$"},
+    "creator_id": {"type": "string", "pattern": "^creator_[A-Za-z0-9_-]+$"},
+    "session_id": {"type": "string", "pattern": "^session_[A-Za-z0-9_-]+$"},
+    "session_start_at": {"$ref": "#/$defs/instant"},
+    "occurred_at": {"$ref": "#/$defs/timestamp"},
+    "eligible": {"type": "boolean"},
+    "exclusion_reason": {"type": ["string", "null"], "enum": [null, "not_enrolled_pre_session", "outside_session", "not_short_form_video", "duplicate_candidate", "test_or_training_event", "no_authority_to_observe", "provenance_impossible_at_enrollment"]},
+    "duplicate_of": {"type": ["string", "null"]},
+    "stages": {
+      "type": "array", "minItems": 6, "maxItems": 6,
+      "prefixItems": [
+        {"$ref": "#/$defs/identified"}, {"$ref": "#/$defs/captured"}, {"$ref": "#/$defs/edited"},
+        {"$ref": "#/$defs/packaged"}, {"$ref": "#/$defs/approved"}, {"$ref": "#/$defs/published"}
+      ], "items": false
+    },
+    "provenance": {"type": "array", "items": {"$ref": "#/$defs/provenance"}},
+    "terminal_status": {"enum": ["published", "abandoned", "right_censored"]},
+    "published_at": {"oneOf": [{"$ref": "#/$defs/timestamp"}, {"type": "null"}]},
+    "abandoned_at": {"oneOf": [{"$ref": "#/$defs/timestamp"}, {"type": "null"}]},
+    "abandoned_by": {"type": ["string", "null"]},
+    "abandonment_reason": {"type": ["string", "null"]},
+    "outcome": {
+      "type": ["object", "null"], "additionalProperties": false,
+      "required": ["views_168h", "measured_at", "provenance_id"],
+      "properties": {"views_168h": {"type": "integer", "minimum": 0}, "measured_at": {"$ref": "#/$defs/instant"}, "provenance_id": {"type": "string"}}
+    }
+  },
+  "allOf": [
+    {"if": {"properties": {"eligible": {"const": true}}}, "then": {"properties": {"exclusion_reason": {"type": "null"}}}, "else": {"properties": {"exclusion_reason": {"type": "string"}}}},
+    {"if": {"properties": {"terminal_status": {"const": "published"}}}, "then": {"properties": {"published_at": {"$ref": "#/$defs/timestamp"}, "abandoned_at": {"type": "null"}, "abandoned_by": {"type": "null"}, "abandonment_reason": {"type": "null"}}}, "else": {"properties": {"published_at": {"type": "null"}, "outcome": {"type": "null"}}}},
+    {"if": {"properties": {"terminal_status": {"const": "abandoned"}}}, "then": {"properties": {"abandoned_at": {"$ref": "#/$defs/timestamp"}, "abandoned_by": {"type": "string", "minLength": 1}, "abandonment_reason": {"type": "string", "minLength": 1}}}, "else": {"properties": {"abandoned_at": {"type": "null"}, "abandoned_by": {"type": "null"}, "abandonment_reason": {"type": "null"}}}}
+  ],
+  "$defs": {
+    "instant": {"type": "string", "format": "date-time", "pattern": "Z$"},
+    "timestamp": {"type": "object", "additionalProperties": false, "required": ["at", "uncertainty_ms_lower", "uncertainty_ms_upper", "provenance_id"], "properties": {"at": {"$ref": "#/$defs/instant"}, "uncertainty_ms_lower": {"type": ["integer", "null"], "maximum": 0}, "uncertainty_ms_upper": {"type": ["integer", "null"], "minimum": 0}, "provenance_id": {"type": "string"}}},
+    "provenance": {"type": "object", "additionalProperties": false, "required": ["provenance_id", "source_id", "source_type", "collector_id", "collected_at", "sha256", "storage_uri", "raw_timestamp", "stated_timezone", "clock_offset_ms"], "properties": {"provenance_id": {"type": "string"}, "source_id": {"type": "string"}, "source_type": {"enum": ["platform_api", "audit_log", "screen_recording", "interaction_log", "stopwatch", "contemporaneous_note"]}, "collector_id": {"type": "string"}, "collected_at": {"$ref": "#/$defs/instant"}, "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "storage_uri": {"type": "string", "minLength": 1}, "raw_timestamp": {"type": "string"}, "stated_timezone": {"type": "string"}, "clock_offset_ms": {"type": ["integer", "null"]}}},
+    "attempt": {"type": "object", "additionalProperties": false, "required": ["attempt_id", "started_at", "ended_at", "actor_id", "tool_name", "tool_version", "automation", "classification_rationale", "status", "is_rework", "supersedes_attempt_id", "failure_reason", "active_intervals", "wait_intervals"], "properties": {"attempt_id": {"type": "string"}, "started_at": {"$ref": "#/$defs/timestamp"}, "ended_at": {"$ref": "#/$defs/timestamp"}, "actor_id": {"type": "string"}, "tool_name": {"type": "string"}, "tool_version": {"type": "string"}, "automation": {"enum": ["manual", "assisted", "automated"]}, "classification_rationale": {"type": "string", "minLength": 1}, "status": {"enum": ["succeeded", "failed", "cancelled"]}, "is_rework": {"type": "boolean"}, "supersedes_attempt_id": {"type": ["string", "null"]}, "failure_reason": {"type": ["string", "null"]}, "active_intervals": {"type": "array", "items": {"$ref": "#/$defs/interval"}}, "wait_intervals": {"type": "array", "items": {"$ref": "#/$defs/wait"}}}},
+    "interval": {"type": "object", "additionalProperties": false, "required": ["start", "end", "provenance_id"], "properties": {"start": {"$ref": "#/$defs/instant"}, "end": {"$ref": "#/$defs/instant"}, "provenance_id": {"type": "string"}}},
+    "wait": {"type": "object", "additionalProperties": false, "required": ["start", "end", "provenance_id", "reason"], "properties": {"start": {"$ref": "#/$defs/instant"}, "end": {"$ref": "#/$defs/instant"}, "provenance_id": {"type": "string"}, "reason": {"enum": ["tool_processing", "upload", "review_queue", "scheduling", "dependency", "other_wait"]}}},
+    "stage": {"type": "object", "additionalProperties": false, "required": ["name", "status", "started_at", "completed_at", "status_reason", "expected_source", "boundary_precision", "attempts"], "properties": {"name": {"type": "string"}, "status": {"enum": ["completed", "not_required", "unobservable", "not_reached"]}, "started_at": {"oneOf": [{"$ref": "#/$defs/timestamp"}, {"type": "null"}]}, "completed_at": {"oneOf": [{"$ref": "#/$defs/timestamp"}, {"type": "null"}]}, "status_reason": {"type": ["string", "null"]}, "expected_source": {"type": ["string", "null"]}, "boundary_precision": {"enum": ["distinct", "coincident", "unknown"]}, "attempts": {"type": "array", "items": {"$ref": "#/$defs/attempt"}}}},
+    "identified": {"allOf": [{"$ref": "#/$defs/stage"}, {"properties": {"name": {"const": "identified"}}}]},
+    "captured": {"allOf": [{"$ref": "#/$defs/stage"}, {"properties": {"name": {"const": "captured"}}}]},
+    "edited": {"allOf": [{"$ref": "#/$defs/stage"}, {"properties": {"name": {"const": "edited_reframed"}}}]},
+    "packaged": {"allOf": [{"$ref": "#/$defs/stage"}, {"properties": {"name": {"const": "captioned_packaged"}}}]},
+    "approved": {"allOf": [{"$ref": "#/$defs/stage"}, {"properties": {"name": {"const": "reviewed_approved"}}}]},
+    "published": {"allOf": [{"$ref": "#/$defs/stage"}, {"properties": {"name": {"const": "published"}}}]}
+  }
+}
