@@ -152,8 +152,9 @@ the fixed interval `[published_at, published_at + 168 hours]`, captured at the
 endpoint with API/audit provenance. Do not use rolling/current counts. If views
 are unavailable or noncomparable, omit value analysis. Exploratory association
 is Spearman correlation between total latency and `log1p(views_168h)`, with a
-creator-cluster bootstrap 95% interval when at least 30 published observations
-and 3 creators have complete outcomes. Record, without causal adjustment claims:
+creator-cluster bootstrap 95% interval (2,000 creator resamples, Python MT19937
+seed `5`, percentile endpoints using linear interpolation) when at least 30
+published observations and 3 creators have complete outcomes. Record, without causal adjustment claims:
 creator, session, platform, destination, session duration, moment offset,
 source-interval duration, day/time, audience size measured before session,
 concurrent live viewers at moment (if observable), content category, staffing,
@@ -202,9 +203,10 @@ must pass schema, ID uniqueness, ordering, stage chronology/nullable-status
 rules, attempt interval containment and non-overlap, provenance/hash shape,
 eligibility ledger completeness, outcome-window timing, cohort floor/cap, and
 decision-rule recomputation. Any failed check blocks analysis. `validate_protocol.py`
-validates the frozen protocol artifacts themselves; execution-data validation is
-required before collection begins and is deliberately not an application or
-publishing implementation.
+validates the frozen protocol artifacts. `validate_observations.py` is the
+normative execution-data validator and MUST pass its synthetic fixture suite
+before collection; it MUST then pass collected data before analysis. Neither
+validator is an application or publishing implementation.
 
 ## 9. Access gates and freeze control
 
@@ -214,6 +216,9 @@ workflow audit, interaction, or stopwatch capture; destination publication
 timestamps/public retrievability; immutable artifact storage; clock-offset
 capture; and (only for optional value analysis) 168-hour view access. Log access
 approval without treating it as authorization to automate or build.
+
+Until every real access gate above is documented, collection readiness is
+reported exactly as `NULL`. Passing either validator does not change that result.
 
 Any change after the first enrolled session requires a new protocol version and
 must be reported as an amendment; v1.0.0 remains immutable. Analyses may not
