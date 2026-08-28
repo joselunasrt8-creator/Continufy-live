@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://continufy.example/research/issue-9/recruitment.schema.json",
+  "title": "Issue 9 recruitment record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_id", "synthetic", "candidate_id", "identity_ref", "candidate_type", "acquisition_channel", "channel_detail", "market_segment", "source_reference", "date_identified", "determination", "eligibility_basis", "exclusion_reasons", "outcome_blind_confirmed", "prohibited_selection_factors", "duplicate", "outreach_policy", "recruitment_state", "state_history", "outreach_attempt_timestamps", "response_classification", "service_relationship_status", "research_discussion_status", "research_consent_status", "observation_authority_status", "creator_workflow_access", "controller_identified", "potential_issue7_gates", "gate_discussion", "provenance", "terminal_recruitment_status"],
+  "properties": {
+    "protocol_id": {"const": "continufy-recruitment-v1.0.0"},
+    "synthetic": {"type": "boolean"},
+    "candidate_id": {"type": "string", "pattern": "^(SYNTH-)?CAND-[A-Z0-9]{8}$"},
+    "identity_ref": {"type": "string", "pattern": "^(SYNTH-)?ID-[A-Z0-9]{8,64}$"},
+    "candidate_type": {"enum": ["CREATOR", "CREATOR_TEAM", "CLIPPER_EDITOR", "AGENCY_OPERATOR", "SERVICE_RELATIONSHIP"]},
+    "acquisition_channel": {"enum": ["FREELANCE_MARKETPLACE", "CREATOR_JOB_BOARD", "CREATOR_HIRING_COMMUNITY", "EDITOR_CLIPPING_DISCORD", "CREATOR_DISCORD", "DIRECT_CREATOR_OUTREACH", "DIRECT_CLIPPER_EDITOR_OUTREACH", "CLIPPING_AGENCY", "PERFORMANCE_CLIPPING_MARKETPLACE", "PERFORMANCE_CLIPPING_COMMUNITY", "RESEARCHER_AS_CLIPPER_SERVICE", "OTHER_CLASSIFIED"]},
+    "channel_detail": {"type": ["string", "null"], "maxLength": 120},
+    "market_segment": {"enum": ["CREATOR_SERVICE", "PERFORMANCE_DISTRIBUTION", "OPEN_FAN_CLIPPING"]},
+    "source_reference": {"type": "string", "pattern": "^(SYNTH-|PUBLIC-|CONTROLLED-)[A-Z0-9_-]{4,100}$"},
+    "date_identified": {"type": "string", "format": "date"},
+    "determination": {"enum": ["INCLUDED", "EXCLUDED"]},
+    "eligibility_basis": {"type": "array", "uniqueItems": true, "items": {"enum": ["ACTIVE_LIVESTREAMING", "SHORT_FORM_USE_OR_INTENT", "OBSERVABLE_CLIPPING_NEED", "EXISTING_CLIPPING_WORKFLOW", "LEGITIMATE_CONTACT_MECHANISM", "PLATFORM_RELEVANCE", "WORKFLOW_ACCESS_DISCUSSIBLE"]}},
+    "exclusion_reasons": {"type": "array", "uniqueItems": true, "items": {"enum": ["NO_RELEVANT_LIVE_WORKFLOW", "NO_SHORT_FORM_USE_OR_INTENT", "NO_LEGITIMATE_CONTACT_MECHANISM", "INACCESSIBLE_OR_PRIVATE_SOURCE", "AUTOMATED_OR_SPAM_LISTING", "EXPIRED_OR_CLOSED_LISTING", "OPEN_FAN_ONLY", "PERFORMANCE_ONLY_NO_CREATOR_WORKFLOW", "CANNOT_IDENTIFY_WORKFLOW_CONTROLLER"]}},
+    "outcome_blind_confirmed": {"const": true},
+    "prohibited_selection_factors": {"type": "array", "maxItems": 0},
+    "duplicate": {"type": "object", "additionalProperties": false, "required": ["status", "canonical_candidate_id"], "properties": {"status": {"enum": ["UNIQUE", "DUPLICATE"]}, "canonical_candidate_id": {"type": ["string", "null"], "pattern": "^(SYNTH-)?CAND-[A-Z0-9]{8}$"}}},
+    "outreach_policy": {"enum": ["GENERIC_TWO_ATTEMPT", "MARKETPLACE_SINGLE_APPLICATION"]},
+    "recruitment_state": {"enum": ["NOT_CONTACTED", "CONTACTED", "NO_RESPONSE", "DECLINED", "INTERESTED", "ACCESS_DISCUSSION_REQUIRED", "INELIGIBLE", "DUPLICATE", "WITHDRAWN", "CANDIDATE_FOR_GATE_VERIFICATION"]},
+    "state_history": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["from", "to", "at"], "properties": {"from": {"type": ["string", "null"]}, "to": {"type": "string"}, "at": {"type": "string", "format": "date-time"}}}},
+    "outreach_attempt_timestamps": {"type": "array", "maxItems": 2, "items": {"type": "string", "format": "date-time"}},
+    "response_classification": {"enum": ["NONE", "NO_RESPONSE", "DECLINED", "INTERESTED", "WITHDRAWN", "INELIGIBLE"]},
+    "service_relationship_status": {"enum": ["NONE", "DISCUSSING", "ACCEPTED", "ACTIVE", "ENDED"]},
+    "research_discussion_status": {"enum": ["NOT_STARTED", "OFFERED", "COMPLETED", "DECLINED"]},
+    "research_consent_status": {"enum": ["NOT_ESTABLISHED", "AGREED_FOR_GATE_VERIFICATION", "DECLINED", "WITHDRAWN"]},
+    "observation_authority_status": {"enum": ["NOT_ESTABLISHED", "AGREED_FOR_GATE_VERIFICATION", "DECLINED", "WITHDRAWN"]},
+    "creator_workflow_access": {"type": "boolean"},
+    "controller_identified": {"type": "boolean"},
+    "potential_issue7_gates": {"type": "array", "uniqueItems": true, "items": {"enum": ["G01", "G02", "G03", "G04", "G05", "G06", "G07", "G08", "G09", "G10", "G11"]}},
+    "gate_discussion": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^G(0[3-9]|1[01])$": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "owner_source_ref"],
+          "properties": {
+            "status": {"enum": ["NOT_DISCUSSED", "DISCUSSIBLE"]},
+            "owner_source_ref": {"type": ["string", "null"], "pattern": "^(SYNTH-|CONTROLLED-)[A-Z0-9_-]{4,100}$"}
+          }
+        }
+      }
+    },
+    "provenance": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["type", "reference", "controlled_storage", "scope"], "properties": {"type": {"enum": ["PUBLIC_LISTING", "PUBLIC_PROFILE", "PUBLIC_COMMUNITY", "PRIVATE_COMMUNICATION", "MARKETPLACE_APPLICATION", "SERVICE_AGREEMENT", "RESEARCH_CONSENT_ARTIFACT", "OBSERVATION_AUTHORITY_ARTIFACT", "INFERENCE"]}, "reference": {"type": "string", "pattern": "^(SYNTH-|PUBLIC-|CONTROLLED-)[A-Z0-9_-]{4,100}$"}, "controlled_storage": {"type": "boolean"}, "scope": {"type": "string", "minLength": 1, "maxLength": 160}}}},
+    "terminal_recruitment_status": {"enum": ["ACTIVE", "TERMINATED"]}
+  }
+}
