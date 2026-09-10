@@ -37,3 +37,20 @@ Issue #5 observation collection
 ```
 
 Until a qualifying participant provides legitimate access, provenance, and observation authority, Issue #7 and Issue #5 remain blocked. Do not build clipping software, automate outreach, or weaken the frozen latency protocol to bypass that boundary.
+
+## Prospective paid-pilot protocol
+
+Issue #11 freezes a separate, broader AI-assisted content-operation pilot
+instrument at [`research/issue-11/PROTOCOL.md`](research/issue-11/PROTOCOL.md).
+It treats clipping as only one possible transformation and preserves the earlier
+latency research as historical evidence. Its terminal protocol-readiness
+determination is `READY_FOR_PROSPECTIVE_PAID_PILOT`: Issue #12 may begin customer
+acquisition, but no outreach, pilot execution, publication, or product work is
+authorized by these artifacts.
+
+Run its dependency-free semantic checks with:
+
+```text
+python3 research/issue-11/test_pilot.py
+python3 research/issue-11/validate_pilot.py research/issue-11/fixtures/valid_not_started.json
+```
