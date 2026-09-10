@@ -1,0 +1,283 @@
+{
+  "protocol_id": "continufy-ai-content-paid-pilot-v1.0.0",
+  "synthetic": true,
+  "pilot_id": "SYNTH-PILOT-1",
+  "customer_id": "SYNTH-CUSTOMER-1",
+  "execution_gate": {
+    "service_agreement_ref": null,
+    "source_permission_ref": null,
+    "observation_consent_ref": null,
+    "scope_frozen": false,
+    "approver_id": null,
+    "publication_controller_id": null,
+    "payment_settlement_ref": null,
+    "dependencies_satisfied": false
+  },
+  "source": {
+    "source_id": "SYNTH-SOURCE-1",
+    "type": "subject_matter_session",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "ownership_basis": "customer_owned",
+    "eligible": true
+  },
+  "scope": {
+    "asset_count": 2,
+    "forms": [
+      "short_form_video",
+      "written"
+    ],
+    "destinations": [
+      "channel-a"
+    ],
+    "revision_limit": 2,
+    "ready_at": "2026-09-08T10:00:00Z"
+  },
+  "price": {
+    "currency": "USD",
+    "proposed": 250,
+    "invoice": 250,
+    "settled": 0,
+    "refund": 0,
+    "net_paid": 0
+  },
+  "publication_authorities": [
+    {
+      "destination": "channel-a",
+      "mode": "not_authorized",
+      "authority_ref": null
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": "SYNTH-ASSET-1",
+      "form": "short_form_video",
+      "status": "approved",
+      "stages": [
+        {
+          "name": "source_intake",
+          "status": "not_required",
+          "classification": "not_applicable",
+          "actor_id": null,
+          "intervals": []
+        },
+        {
+          "name": "research_selection",
+          "status": "not_required",
+          "classification": "not_applicable",
+          "actor_id": null,
+          "intervals": []
+        },
+        {
+          "name": "transformation",
+          "status": "performed",
+          "classification": "ai_assisted",
+          "actor_id": "SYNTH-ACTOR",
+          "intervals": [
+            {
+              "kind": "active_labor",
+              "start": "2026-09-08T10:00:00Z",
+              "end": "2026-09-08T10:10:00Z"
+            }
+          ]
+        },
+        {
+          "name": "packaging",
+          "status": "not_required",
+          "classification": "not_applicable",
+          "actor_id": null,
+          "intervals": []
+        },
+        {
+          "name": "human_review",
+          "status": "performed",
+          "classification": "human",
+          "actor_id": "SYNTH-ACTOR",
+          "intervals": []
+        },
+        {
+          "name": "revision",
+          "status": "not_required",
+          "classification": "not_applicable",
+          "actor_id": null,
+          "intervals": []
+        },
+        {
+          "name": "approval",
+          "status": "performed",
+          "classification": "human",
+          "actor_id": "SYNTH-ACTOR",
+          "intervals": []
+        },
+        {
+          "name": "publishing_distribution",
+          "status": "not_required",
+          "classification": "not_applicable",
+          "actor_id": null,
+          "intervals": []
+        },
+        {
+          "name": "performance_observation",
+          "status": "not_required",
+          "classification": "not_applicable",
+          "actor_id": null,
+          "intervals": []
+        },
+        {
+          "name": "continuation_decision",
+          "status": "not_required",
+          "classification": "not_applicable",
+          "actor_id": null,
+          "intervals": []
+        }
+      ],
+      "active_minutes": 10,
+      "waiting_minutes": 0,
+      "approval_minutes": 0,
+      "rework_minutes": 0,
+      "published": false,
+      "destination": null,
+      "publication_authority_ref": null
+    },
+    {
+      "asset_id": "SYNTH-ASSET-2",
+      "form": "written",
+      "status": "approved",
+      "stages": [
+        {
+          "name": "source_intake",
+          "status": "not_required",
+          "classification": "not_applicable",
+          "actor_id": null,
+          "intervals": []
+        },
+        {
+          "name": "research_selection",
+          "status": "not_required",
+          "classification": "not_applicable",
+          "actor_id": null,
+          "intervals": []
+        },
+        {
+          "name": "transformation",
+          "status": "performed",
+          "classification": "ai_assisted",
+          "actor_id": "SYNTH-ACTOR",
+          "intervals": [
+            {
+              "kind": "active_labor",
+              "start": "2026-09-08T10:00:00Z",
+              "end": "2026-09-08T10:10:00Z"
+            }
+          ]
+        },
+        {
+          "name": "packaging",
+          "status": "not_required",
+          "classification": "not_applicable",
+          "actor_id": null,
+          "intervals": []
+        },
+        {
+          "name": "human_review",
+          "status": "performed",
+          "classification": "human",
+          "actor_id": "SYNTH-ACTOR",
+          "intervals": []
+        },
+        {
+          "name": "revision",
+          "status": "not_required",
+          "classification": "not_applicable",
+          "actor_id": null,
+          "intervals": []
+        },
+        {
+          "name": "approval",
+          "status": "performed",
+          "classification": "human",
+          "actor_id": "SYNTH-ACTOR",
+          "intervals": []
+        },
+        {
+          "name": "publishing_distribution",
+          "status": "not_required",
+          "classification": "not_applicable",
+          "actor_id": null,
+          "intervals": []
+        },
+        {
+          "name": "performance_observation",
+          "status": "not_required",
+          "classification": "not_applicable",
+          "actor_id": null,
+          "intervals": []
+        },
+        {
+          "name": "continuation_decision",
+          "status": "not_required",
+          "classification": "not_applicable",
+          "actor_id": null,
+          "intervals": []
+        }
+      ],
+      "active_minutes": 10,
+      "waiting_minutes": 0,
+      "approval_minutes": 0,
+      "rework_minutes": 0,
+      "published": false,
+      "destination": null,
+      "publication_authority_ref": null
+    }
+  ],
+  "costs": {
+    "loaded_hourly_rate": 30,
+    "labor": 10,
+    "ai_api": 0,
+    "contractor": 0,
+    "media": 0,
+    "platform": 0,
+    "direct_cost_total": 10,
+    "approved_asset_count": 2,
+    "cost_per_delivered_asset": 5
+  },
+  "outcomes": [
+    {
+      "asset_id": "SYNTH-ASSET-1",
+      "window": "24h",
+      "metric": "views",
+      "value": null,
+      "missing_reason": "not_observed",
+      "evidence_ref": null,
+      "attribution": "not_applicable",
+      "claimed_as_revenue": false
+    }
+  ],
+  "usefulness": {
+    "output_usability": null,
+    "brand_fit": null,
+    "time_saved": null,
+    "overall": null,
+    "accepted": null
+  },
+  "continuation": {
+    "decision": "not_observed",
+    "follow_on_settled": 0,
+    "payment_ref": null
+  },
+  "claims": {
+    "ai_usage_proves_value": false,
+    "content_volume_proves_outcome": false,
+    "views_are_revenue": false,
+    "correlation_is_attribution": false,
+    "usefulness_is_causal_lift": false,
+    "pilot_authorizes_product": false
+  },
+  "privacy": {
+    "retention_deadline": "2026-12-08T00:00:00Z",
+    "access_owner_id": "SYNTH-OWNER",
+    "deletion_status": "scheduled",
+    "credentials_stored": false,
+    "customer_data_in_repository": false
+  },
+  "pilot_status": "not_started"
+}
