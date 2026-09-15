@@ -1,26 +1,43 @@
-# Continufy-live empirical baseline
+# Continufy-live
 
-This repository currently contains a bounded investigation of public data for
-livestream clipping operations. It is **not** a clipping product or a proposed
-application architecture.
+`Continufy-live` is a bounded empirical research repository investigating whether AI-assisted content operations solve a measurable workflow problem worth further testing.
 
-The investigation, method, evidence limits, and determination are in
-[`research/issue-1-feasibility.md`](research/issue-1-feasibility.md). The
-machine-readable companion artifacts are:
+It is **not currently a clipping product, production architecture, validated business, or evidence of customer demand**.
+
+The repository began with a livestream-clipping feasibility investigation and later added a broader prospective paid-pilot protocol. Those are related research tracks, not evidence that clipping or any particular product form has been selected.
+
+## Governing question
+
+> Is there a real content-operation workflow problem for which an AI-assisted intervention produces measurable value under legitimate access and prospective observation?
+
+The repository should answer that question before product architecture is allowed to outrun evidence.
+
+## Research lineage
+
+### 1. Public-data feasibility baseline
+
+The initial investigation examined what could legitimately be learned from public data about livestream clipping operations.
+
+The investigation, method, evidence limits, and determination are in [`research/issue-1-feasibility.md`](research/issue-1-feasibility.md). Machine-readable companion artifacts include:
 
 - [`research/source-inventory.csv`](research/source-inventory.csv)
 - [`research/observation.schema.json`](research/observation.schema.json)
 - [`research/pilot/observations.csv`](research/pilot/observations.csv)
 - [`research/pilot/acquisition-log.csv`](research/pilot/acquisition-log.csv)
 
-`python3 scripts/validate_baseline.py` checks the artifacts without network
-access or third-party packages.
+Run:
 
-## Current execution boundary
+```text
+python3 scripts/validate_baseline.py
+```
 
-The recruitment protocol is complete and supports **manual participant outreach only**.
+The validator operates without network access or third-party packages.
 
-Current research state:
+The important boundary from this work is that public observations alone cannot establish the complete creator-controlled workflow, legitimate access, provenance, or the intervention's effect on that workflow.
+
+### 2. Frozen latency observation path
+
+A participant-acquisition protocol exists for the earlier latency investigation and supports **manual participant outreach only**.
 
 ```text
 Participant acquisition protocol
@@ -36,17 +53,23 @@ Issue #7 gates G01–G11
 Issue #5 observation collection
 ```
 
-Until a qualifying participant provides legitimate access, provenance, and observation authority, Issue #7 and Issue #5 remain blocked. Do not build clipping software, automate outreach, or weaken the frozen latency protocol to bypass that boundary.
+Until a qualifying participant provides the required legitimate access, provenance, and observation authority, Issue #7 and Issue #5 remain blocked.
 
-## Prospective paid-pilot protocol
+Do not build clipping software, automate outreach, synthesize participant evidence, or weaken the frozen latency protocol to bypass that boundary.
 
-Issue #11 freezes a separate, broader AI-assisted content-operation pilot
-instrument at [`research/issue-11/PROTOCOL.md`](research/issue-11/PROTOCOL.md).
-It treats clipping as only one possible transformation and preserves the earlier
-latency research as historical evidence. Its terminal protocol-readiness
-determination is `READY_FOR_PROSPECTIVE_PAID_PILOT`: Issue #12 may begin customer
-acquisition, but no outreach, pilot execution, publication, or product work is
-authorized by these artifacts.
+### 3. Prospective paid-pilot path
+
+Issue #11 freezes a separate and broader AI-assisted content-operation pilot instrument at [`research/issue-11/PROTOCOL.md`](research/issue-11/PROTOCOL.md).
+
+It treats clipping as only one possible transformation and preserves the earlier latency work as historical evidence rather than converting it into product validation.
+
+Its terminal protocol-readiness determination is:
+
+```text
+READY_FOR_PROSPECTIVE_PAID_PILOT
+```
+
+That means the protocol is ready for the next prospective step defined by the research. It does **not** mean that customer demand, willingness to pay, intervention effectiveness, retention, product-market fit, or a production architecture has been demonstrated.
 
 Run its dependency-free semantic checks with:
 
@@ -54,3 +77,96 @@ Run its dependency-free semantic checks with:
 python3 research/issue-11/test_pilot.py
 python3 research/issue-11/validate_pilot.py research/issue-11/fixtures/valid_not_started.json
 ```
+
+## Current evidence state
+
+The repository currently supports conclusions about **research readiness and evidence boundaries**, not business validation.
+
+Supported:
+
+- a bounded public-data feasibility baseline exists;
+- public evidence has known limitations;
+- a frozen latency-observation protocol exists;
+- participant access is required for claims that depend on private workflow state or provenance;
+- a broader prospective paid-pilot protocol exists and has semantic validation machinery; and
+- clipping has not been established as the uniquely correct intervention.
+
+Not yet established:
+
+- that latency is the primary customer problem;
+- that AI clipping creates measurable economic value;
+- that the broader content-operation intervention creates measurable economic value;
+- that a customer will pay under the frozen pilot terms;
+- that a participant will retain the intervention after the experiment;
+- that the intervention beats a simpler baseline;
+- that observed improvements generalize beyond a participant or workflow;
+- that Continufy-live should become a standalone product; or
+- that any specific production architecture is justified.
+
+## Claim ladder
+
+Claims should advance only when the evidence required for the next claim exists.
+
+```text
+Protocol readiness
+        ↓
+Legitimate participant access
+        ↓
+Prospective baseline observation
+        ↓
+Governed intervention
+        ↓
+Measured workflow effect
+        ↓
+Economic / willingness-to-pay evidence
+        ↓
+Retention or repeated-use evidence
+        ↓
+Broader product hypothesis
+```
+
+This is an evidence ladder, not a guarantee that every rung will be reached. A negative or null result may terminate the product hypothesis.
+
+## Experimental discipline
+
+Future work should preserve these rules:
+
+1. **Observation before explanation** — do not assume the bottleneck is editing, clipping, publishing, or another stage before measuring it.
+2. **Prospective criteria** — define inclusion, measurement, and decision rules before observing the intervention outcome.
+3. **Legitimate access** — do not infer private workflow facts that require participant authority or provenance.
+4. **Strong baseline** — compare the intervention against the participant's real baseline or a justified simpler alternative.
+5. **No synthetic success** — fixtures may test machinery but cannot substitute for participant observations or economic evidence.
+6. **Bounded claims** — protocol readiness, workflow improvement, willingness to pay, retention, and market demand are different claims.
+7. **Preserve negative results** — a failed intervention, null effect, or refusal to pay is evidence.
+8. **Stop when blocked** — lack of legitimate evidence is a research boundary, not permission to invent another proxy.
+
+## Relationship to the Continufy ecosystem
+
+Continufy-live is a domain research surface. It may test Continufy components when doing so answers a prospectively defined research question, but it is not required to validate the Continufy architecture as a whole.
+
+Likewise, successful use of another Continufy component inside this repository would establish only the evidence actually measured in that experiment.
+
+```text
+Research readiness ≠ product readiness
+Protocol validity ≠ intervention effectiveness
+Workflow improvement ≠ willingness to pay
+Willingness to pay ≠ market demand
+AI capability ≠ customer value
+Internal validation ≠ independent adoption
+```
+
+## Current objective
+
+The highest-value next evidence is not additional product architecture. It is legitimate prospective observation of a real workflow under the applicable frozen protocol, followed by a measured intervention only when the protocol permits it.
+
+The repository should remain capable of concluding that:
+
+- the hypothesized problem is not important;
+- clipping is not the relevant intervention;
+- AI assistance does not materially improve the workflow;
+- the improvement is real but not economically valuable;
+- the customer will not pay or retain it;
+- a simpler intervention performs equally well; or
+- the opportunity is strong enough to justify a narrower product hypothesis.
+
+Any of those is a legitimate research result.
