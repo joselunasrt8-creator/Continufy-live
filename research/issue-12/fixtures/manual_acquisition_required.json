@@ -1,0 +1,38 @@
+{
+  "protocol_id": "continufy-ai-content-paid-pilot-v1.0.0",
+  "synthetic": true,
+  "candidate_id": "SYNTH-CANDIDATE-UNACQUIRED",
+  "acquisition_channel": "INBOUND",
+  "first_identified_at": "2026-09-16T00:00:00Z",
+  "eligibility_basis": [],
+  "offer": {
+    "presented_at": null,
+    "description_ref": null,
+    "currency": "USD",
+    "proposed_price": null,
+    "accepted_price": null,
+    "accepted_at": null,
+    "service_agreement_ref": null,
+    "settled_amount": null,
+    "payment_settlement_ref": null
+  },
+  "accepted_scope": null,
+  "source_authority": {
+    "basis": "NOT_VERIFIED",
+    "complete": false,
+    "retrievable": false,
+    "selected_before_outcomes": false,
+    "authority_ref": null
+  },
+  "permissions": {
+    "creation": {"status": "NOT_REQUESTED", "permission_ref": null},
+    "evidence_retention": {"status": "NOT_REQUESTED", "permission_ref": null},
+    "measurement_data_access": {"status": "NOT_REQUESTED", "permission_ref": null},
+    "publication": []
+  },
+  "response_state": "NOT_CONTACTED",
+  "withdrawal_cancellation": {"status": "NONE", "at": null, "reason_ref": null},
+  "unresolved_dependencies": ["SOURCE_AUTHORITY", "SOURCE_ACCESS", "CREATION_PERMISSION", "EVIDENCE_RETENTION_PERMISSION", "PUBLICATION_AUTHORITY", "MEASUREMENT_PERMISSION", "DATA_ACCESS", "APPROVER", "PUBLICATION_CONTROLLER", "SCOPE", "PAYMENT"],
+  "evidence": [],
+  "transition_determination": "MANUAL_ACQUISITION_REQUIRED"
+}

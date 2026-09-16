@@ -54,3 +54,17 @@ Run its dependency-free semantic checks with:
 python3 research/issue-11/test_pilot.py
 python3 research/issue-11/validate_pilot.py research/issue-11/fixtures/valid_not_started.json
 ```
+
+## Paid-pilot customer acquisition preparation
+
+Issue #12's manual acquisition checklist, record schema, and deterministic
+validator are in [`research/issue-12/`](research/issue-12/ACQUISITION.md). They
+do not contact or represent a customer and do not authorize pilot execution.
+The checked-in synthetic template deterministically returns
+`MANUAL_ACQUISITION_REQUIRED`; only legitimate, externally retained evidence
+for one real paid customer can unlock Issue #13.
+
+```text
+python3 research/issue-12/test_acquisition.py
+python3 research/issue-12/validate_acquisition.py research/issue-12/fixtures/manual_acquisition_required.json
+```
