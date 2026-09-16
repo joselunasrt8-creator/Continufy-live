@@ -55,7 +55,7 @@ class AcquisitionTests(unittest.TestCase):
         record["transition_determination"] = "NO_ELIGIBLE_PAID_PILOT_CUSTOMER_ACQUIRED"
         validate(record)
 
-    def test_complete_real_evidence_is_eligible(self):
+    def eligible_record(self):
         record = self.record()
         record.update(synthetic=False, candidate_id="candidate-001", response_state="PAID", unresolved_dependencies=[])
         record["offer"].update(
@@ -87,7 +87,28 @@ class AcquisitionTests(unittest.TestCase):
         ]
         record["evidence"] = [{"type": kind, "reference": ref, "controlled_storage": True, "scope": "frozen pilot"} for kind, ref in types_and_refs]
         record["transition_determination"] = "PAID_PILOT_CUSTOMER_ELIGIBLE"
-        validate(record)
+        return record
+
+    def test_complete_real_evidence_is_eligible(self):
+        validate(self.eligible_record())
+
+    def test_reference_must_resolve_to_correct_evidence_type(self):
+        record = self.eligible_record()
+        for item in record["evidence"]:
+            if item["reference"] == "agreement-001":
+                item["type"] = "DATA_ACCESS"
+                break
+        record["evidence"].append({"type": "SERVICE_AGREEMENT", "reference": "unrelated-agreement", "controlled_storage": True, "scope": "frozen pilot"})
+        with self.assertRaisesRegex(ValidationError, "service_agreement_ref must resolve to SERVICE_AGREEMENT evidence"):
+            validate(record)
+
+    def test_publication_reference_must_resolve_to_publication_evidence(self):
+        record = self.eligible_record()
+        record["permissions"]["publication"] = [{"destination": "destination-001", "mode": "CUSTOMER_PUBLISHES", "permission_ref": "publication-001"}]
+        record["evidence"].append({"type": "DATA_ACCESS", "reference": "publication-001", "controlled_storage": True, "scope": "frozen pilot"})
+        record["evidence"].append({"type": "PUBLICATION_PERMISSION", "reference": "unrelated-publication", "controlled_storage": True, "scope": "frozen pilot"})
+        with self.assertRaisesRegex(ValidationError, "must resolve to PUBLICATION_PERMISSION evidence"):
+            validate(record)
 
 
 if __name__ == "__main__":
