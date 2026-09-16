@@ -122,12 +122,28 @@ def validate(record: dict) -> None:
     for publication in record["permissions"]["publication"]:
         if (publication["mode"] == "NOT_AUTHORIZED") != (publication["permission_ref"] is None):
             fail("publication mode and evidence reference are inconsistent")
-    evidence_refs = {item["reference"] for item in record["evidence"]}
-    refs = [record["offer"]["service_agreement_ref"], record["offer"]["payment_settlement_ref"], record["source_authority"]["authority_ref"]]
-    refs += [record["permissions"][name]["permission_ref"] for name in ("creation", "evidence_retention", "measurement_data_access")]
-    refs += [item["permission_ref"] for item in record["permissions"]["publication"]]
-    if any(ref is not None and ref not in evidence_refs for ref in refs):
-        fail("authority and permission references must resolve to evidence")
+
+    evidence_by_ref = {}
+    for item in record["evidence"]:
+        evidence_by_ref.setdefault(item["reference"], set()).add(item["type"])
+
+    typed_refs = [
+        (record["offer"]["service_agreement_ref"], "SERVICE_AGREEMENT", "service_agreement_ref"),
+        (record["offer"]["payment_settlement_ref"], "PAYMENT_SETTLEMENT", "payment_settlement_ref"),
+        (record["source_authority"]["authority_ref"], "SOURCE_AUTHORITY", "source_authority.authority_ref"),
+        (record["permissions"]["creation"]["permission_ref"], "CREATION_PERMISSION", "creation.permission_ref"),
+        (record["permissions"]["evidence_retention"]["permission_ref"], "EVIDENCE_RETENTION_PERMISSION", "evidence_retention.permission_ref"),
+        (record["permissions"]["measurement_data_access"]["permission_ref"], "MEASUREMENT_PERMISSION", "measurement_data_access.permission_ref"),
+    ]
+    typed_refs += [
+        (item["permission_ref"], "PUBLICATION_PERMISSION", f"publication[{item['destination']}].permission_ref")
+        for item in record["permissions"]["publication"]
+        if item["permission_ref"] is not None
+    ]
+    for ref, expected_type, field in typed_refs:
+        if ref is not None and expected_type not in evidence_by_ref.get(ref, set()):
+            fail(f"{field} must resolve to {expected_type} evidence")
+
     expected = determine(record)
     if record["transition_determination"] != expected:
         fail(f"transition determination must be {expected}")
