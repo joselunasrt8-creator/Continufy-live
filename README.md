@@ -152,7 +152,7 @@ The frozen v1 experiment tests a **paid customer-service model**: transform one 
 
 An **AI-native owned-media model** is economically and operationally different. It may begin with an original idea or research corpus, generate new audiovisual assets, publish through an operator-controlled channel, accumulate audience and intellectual property, and monetize through platform revenue, sponsorships, affiliates, licensing, products, or memberships. That model has no external pilot customer and is therefore outside the eligible-source, payment, approval, and continuation semantics of v1.
 
-Course pages, creator claims, public view counts, and tool demonstrations may motivate hypotheses or inform workflow design. They do not establish reproducible production economics, attributable revenue, durable audience demand, or owned-media viability. Testing that model requires a separate prospective protocol and evidence record; its observations must not be merged into the paid-service cohort or used to amend v1 after enrollment.
+Course pages, creator claims, public view counts, and tool demonstrations may motivate hypotheses or inform workflow design. They do not establish reproducible production economics, attributable revenue, durable audience demand, or owned-media viability. Testing that model requires a separate prospective protocol and evidence record, now tracked by [Issue #17](https://github.com/joselunasrt8-creator/Continufy-live/issues/17); its observations must not be merged into the paid-service cohort or used to amend v1 after enrollment.
 
 ## Relationship to the Continufy ecosystem
 
