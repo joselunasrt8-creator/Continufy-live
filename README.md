@@ -71,6 +71,12 @@ READY_FOR_PROSPECTIVE_PAID_PILOT
 
 That means the protocol is ready for the next prospective step defined by the research. It does **not** mean that customer demand, willingness to pay, intervention effectiveness, retention, product-market fit, or a production architecture has been demonstrated.
 
+### Current program state
+
+- Issue #11 is complete at `READY_FOR_PROSPECTIVE_PAID_PILOT`.
+- Issue #12 is the active gate for acquiring the first eligible paid customer and remains `MANUAL_ACQUISITION_REQUIRED` until real external evidence satisfies it.
+- Issue #13 is an execution surface, not an acquisition shortcut. The frozen v1 protocol governs a cohort with a stopping rule of 5 completed eligible paid pilots, 10 enrolled customers, or 90 days after first enrollment, whichever occurs first. Every enrolled pilot requires the same customer-specific authority, payment, scope, provenance, and measurement gates. Additional outreach or enrollment requires explicit acquisition authorization; Issue #13 alone does not provide it.
+
 Run its dependency-free semantic checks with:
 
 ```text
@@ -139,6 +145,14 @@ Future work should preserve these rules:
 6. **Bounded claims** — protocol readiness, workflow improvement, willingness to pay, retention, and market demand are different claims.
 7. **Preserve negative results** — a failed intervention, null effect, or refusal to pay is evidence.
 8. **Stop when blocked** — lack of legitimate evidence is a research boundary, not permission to invent another proxy.
+
+## Business-model boundary
+
+The frozen v1 experiment tests a **paid customer-service model**: transform one authorized customer-owned or licensed recording into a bounded multi-platform package and observe burden, usefulness, payment, and continuation.
+
+An **AI-native owned-media model** is economically and operationally different. It may begin with an original idea or research corpus, generate new audiovisual assets, publish through an operator-controlled channel, accumulate audience and intellectual property, and monetize through platform revenue, sponsorships, affiliates, licensing, products, or memberships. That model has no external pilot customer and is therefore outside the eligible-source, payment, approval, and continuation semantics of v1.
+
+Course pages, creator claims, public view counts, and tool demonstrations may motivate hypotheses or inform workflow design. They do not establish reproducible production economics, attributable revenue, durable audience demand, or owned-media viability. Testing that model requires a separate prospective protocol and evidence record; its observations must not be merged into the paid-service cohort or used to amend v1 after enrollment.
 
 ## Relationship to the Continufy ecosystem
 
