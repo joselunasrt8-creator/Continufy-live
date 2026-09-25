@@ -74,6 +74,8 @@ That means the protocol is ready for the next prospective step defined by the re
 ### Current program state
 
 - Issue #11 is complete at `READY_FOR_PROSPECTIVE_PAID_PILOT`.
+- Issue #20 has frozen clipping as a supporting transformation for the first offer at [`research/issue-20/CLIPPING_ROLE.md`](research/issue-20/CLIPPING_ROLE.md): `READY_TO_TEST_CLIPPING_AS_SUPPORTING_TRANSFORMATION`.
+- Issue #18 has frozen the $300 differentiated outreach hypothesis at [`research/issue-18/OUTREACH_BRIEF.md`](research/issue-18/OUTREACH_BRIEF.md): `READY_FOR_DIFFERENTIATED_OUTREACH`.
 - Issue #12 is the active gate for acquiring the first eligible paid customer and remains `MANUAL_ACQUISITION_REQUIRED` until real external evidence satisfies it.
 - Issue #13 is an execution surface, not an acquisition shortcut. The frozen v1 protocol governs a cohort with a stopping rule of 5 completed eligible paid pilots, 10 enrolled customers, or 90 days after first enrollment, whichever occurs first. Every enrolled pilot requires the same customer-specific authority, payment, scope, provenance, and measurement gates. Additional outreach or enrollment requires explicit acquisition authorization; Issue #13 alone does not provide it.
 
