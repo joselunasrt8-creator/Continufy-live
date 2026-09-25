@@ -78,6 +78,8 @@ That means the protocol is ready for the next prospective step defined by the re
 - Issue #18 has frozen the $300 differentiated outreach hypothesis at [`research/issue-18/OUTREACH_BRIEF.md`](research/issue-18/OUTREACH_BRIEF.md): `READY_FOR_DIFFERENTIATED_OUTREACH`.
 - Issue #12 is the active gate for acquiring the first eligible paid customer and remains `MANUAL_ACQUISITION_REQUIRED` until real external evidence satisfies it.
 - A public prospect-screening shortlist is in [`research/issue-12/PROSPECT_SHORTLIST.md`](research/issue-12/PROSPECT_SHORTLIST.md); it is desk research only and does not satisfy acquisition eligibility.
+- Issue #22 is the active execution issue for the frozen first three-prospect manual outreach batch.
+- The complete issue-state audit is in [`ISSUE_AUDIT_2026-09-25.md`](ISSUE_AUDIT_2026-09-25.md). Owned-media, trend-radar, and multi-channel control-plane issues are closed as `not_planned` for the current phase with explicit reopen gates.
 - Issue #13 is an execution surface, not an acquisition shortcut. The frozen v1 protocol governs a cohort with a stopping rule of 5 completed eligible paid pilots, 10 enrolled customers, or 90 days after first enrollment, whichever occurs first. Every enrolled pilot requires the same customer-specific authority, payment, scope, provenance, and measurement gates. Additional outreach or enrollment requires explicit acquisition authorization; Issue #13 alone does not provide it.
 
 Run its dependency-free semantic checks with:
@@ -155,7 +157,7 @@ The frozen v1 experiment tests a **paid customer-service model**: transform one 
 
 An **AI-native owned-media model** is economically and operationally different. It may begin with an original idea or research corpus, generate new audiovisual assets, publish through an operator-controlled channel, accumulate audience and intellectual property, and monetize through platform revenue, sponsorships, affiliates, licensing, products, or memberships. That model has no external pilot customer and is therefore outside the eligible-source, payment, approval, and continuation semantics of v1.
 
-Course pages, creator claims, public view counts, and tool demonstrations may motivate hypotheses or inform workflow design. They do not establish reproducible production economics, attributable revenue, durable audience demand, or owned-media viability. Testing that model requires a separate prospective protocol and evidence record, now tracked by [Issue #17](https://github.com/joselunasrt8-creator/Continufy-live/issues/17); its observations must not be merged into the paid-service cohort or used to amend v1 after enrollment.
+Course pages, creator claims, public view counts, and tool demonstrations may motivate hypotheses or inform workflow design. They do not establish reproducible production economics, attributable revenue, durable audience demand, or owned-media viability. Testing that model requires a separate prospective protocol and evidence record. [Issue #17](https://github.com/joselunasrt8-creator/Continufy-live/issues/17) preserves that hypothesis but is closed as `not_planned` for the current phase until the paid-service acquisition batch concludes and the portfolio is reassessed. Owned-media observations must not be merged into the paid-service cohort or used to amend v1 after enrollment.
 
 ## Relationship to the Continufy ecosystem
 
